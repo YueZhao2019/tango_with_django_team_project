@@ -26,4 +26,10 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Sign in</button>
     </form>
 </div>
+ <div>
+     <span>Login via GitHub：</span>
+     <a href="{% url 'social:begin' 'github' %}" title="Github Login">
+         <img src="/static/git.jpg" style="width: 32px; height: 32px;" alt="git Login">
+     </a>
+ </div>
 {% endblock %}

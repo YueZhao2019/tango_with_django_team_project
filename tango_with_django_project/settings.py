@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rango',
+    'social_django', # github login
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                #github login
+                'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -107,6 +111,21 @@ AUTH_PASSWORD_VALIDATORS = [
         'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+#Authenticate user informatiion
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+#github
+SOCIAL_AUTH_GITHUB_KEY = 'c3dfa8a05aeaed24c0a2'
+SOCIAL_AUTH_GITHUB_SECRET = '00da71c9b2ff9c1fd4c169d054ce934136d6b900'
+SOCIAL_AUTH_GITHUB_USE_OPENID_AS_USERNAME = True
+#callback
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000'
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

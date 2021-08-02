@@ -25,4 +25,6 @@ urlpatterns = [
     path('rango/', include('rango.urls')),
     # 3 - The above maps any URLs starting with rango/ to be handled by rango.
     path('admin/', admin.site.urls),
+        #github login
+    path('login/github/', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
