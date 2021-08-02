@@ -9,27 +9,32 @@
 
 
 <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet">
-<div class="container">
-    <div class="jumbotron p-4">
-        <div class="container">
-            <h1 class="jumbotron-heading">Login</h1>
-        </div>
+<div class="m-auto p-4 login-box">
+    <div class="">
+        <form class="form-signin" role="form" method="post" action=".">
+            {% csrf_token %}
+            <div class="login-input">
+                <label for="inputUsername" class="sr-only">Username</label>
+                <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" required autofocus>
+            </div>
+            <div class="login-input">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="id_password" class="form-control login-input" placeholder="Password" required>   
+            </div>
+    
+            <div class="login-input">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Sign in</button>
+            </div>
+            <div class="login-input">
+                <a href="{% url 'rango:register'%}">Register an accountant</a> <br />
+            </div>
+            <div class="login-input">
+                <span>Login via GitHub：</span>
+                <a href="{% url 'social:begin' 'github' %}" title="Github Login">
+                    <img src="/static/images/git.jpg" style="width: 32px; height: 32px;" alt="git Login">
+                </a>
+            </div>
+        </form>
     </div>
-    <form class="form-signin" role="form" method="post" action=".">
-        {% csrf_token %}
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" required autofocus>
-
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
-        
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Sign in</button>
-    </form>
 </div>
- <div>
-     <span>Login via GitHub：</span>
-     <a href="{% url 'social:begin' 'github' %}" title="Github Login">
-         <img src="/static/git.jpg" style="width: 32px; height: 32px;" alt="git Login">
-     </a>
- </div>
 {% endblock %}

@@ -32,3 +32,13 @@ body {
     background-position: center 0;
 
 }
+
+.login-box{
+    width: 460px;
+    background-color:rgb(255,255,255);
+    border-radius: 2px;
+}
+
+.login-input{
+    padding: 10px;
+}
