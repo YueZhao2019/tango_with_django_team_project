@@ -13,16 +13,17 @@
     <title>
         Rango - {% block title_block %}How to Tango with Django!{% endblock %}
     </title>
-
+    
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'css/rango.css' %}" >
     <link href="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="background">
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
             <a class="navbar-brand p-2" href="{% url 'rango:index' %}">Rango</a>
@@ -66,7 +67,8 @@
             {% else %}
             <main role="main" class="col-md-12  ml-sm-auto col-lg-12 px-4"></main>
             {% endif %}
-                {% block body_block %}{% endblock %}
+                {% block body_block %}
+                {% endblock %}
             </main>
         </div>
     </div>
