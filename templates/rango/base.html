@@ -51,7 +51,9 @@
     </header>
 
     <div class="container-fluid">
+    
         <div class="row">
+            {% if user.is_authenticated %}
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     {% block sidebar_block %}
@@ -59,16 +61,12 @@
                     {% endblock %}
                 </div>
             </nav>
-
+            
             <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
+            {% else %}
+            <main role="main" class="col-md-12  ml-sm-auto col-lg-12 px-4"></main>
+            {% endif %}
                 {% block body_block %}{% endblock %}
-
-                <!-- FOOTER -->
-                <footer>
-                    <p class="float-right"><a href="#">Back to top</a></p>
-
-                    </p>
-                </footer>
             </main>
         </div>
     </div>
