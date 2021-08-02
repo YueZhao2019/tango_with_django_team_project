@@ -1,0 +1,9 @@
+.pyc
+.DS_Store
+__pycache__/
+db.sqlite3
+.vscode/*
+*.key
+thumbs.db
+migrations/
+Thumbs.db
