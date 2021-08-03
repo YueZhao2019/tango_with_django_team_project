@@ -23,8 +23,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'),
     path('rango/', include('rango.urls')),
-    # 3 - The above maps any URLs starting with rango/ to be handled by rango.
     path('admin/', admin.site.urls),
-        #github login
+    #Log in
+    path('accounts/', include('registration.backends.simple.urls')),
+    #github login
     path('login/github/', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
