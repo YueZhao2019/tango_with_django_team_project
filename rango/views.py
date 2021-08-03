@@ -222,3 +222,19 @@ def add_comment(request, category_name_slug):
 
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_comment.html', context=context_dict)
+    
+@login_required
+def comment_delete(request,category_name_slug):
+    
+    #登录用户可以删除任意一条评论
+    # 根据 id 获取需要删除的文章
+    id = request.GET.get('id')
+    print(id)
+    comment = Comment.objects.get(id=id)
+    c_id = Comment.objects.filter(id=id).values_list('category_id', flat=True)[0]
+    c_name = Category.objects.filter(id=c_id).values_list('name', flat=True)[0]
+    print(c_name)
+    # 调用.delete()方法删除评论
+    comment.delete()
+    # 完成删除后返回当前类别页面
+    return redirect('/rango/category/' +c_name + '/' )

@@ -1,5 +1,5 @@
 {% extends 'rango/base.html' %}
-{% load staticfiles %}
+{% load staticfiles%}
 
 {% block title_block %}
 {% if category %}
@@ -47,9 +47,13 @@ Unknown Category
     <div class="list-group" id="comment_list">
         {% for comment in comments %}
         <a href="#" class="list-group-item list-group-item-action">
+           
             <p class="mb-1 comment">{{ comment.content}}</p>
             <small style="color: green">{{ comment.user }}&nbsp;&nbsp;&nbsp;</small>
             <small style="color: purple">{{ comment.time|date:"Y-m-d H:i:s" }}</small>
+            <small style="color: purple"><a href="{% url 'rango:comment_delete' category.slug %}?id={{ comment.id }}">删除该评论</a></small>
+
+{#            <a href="{% url 'rango:comment_delete' category.slug %}">删除任意一个用户的评论</a> <br />#}
         </a>
         {% endfor %}
     </div>
