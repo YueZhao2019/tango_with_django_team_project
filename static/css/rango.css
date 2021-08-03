@@ -42,7 +42,9 @@ body {
 .register-wrap h1{
     text-align: center;
 }
-
+.index-top{
+    color:#f07e33;
+}
 .category-container{
     margin-top: 30px;
 }
