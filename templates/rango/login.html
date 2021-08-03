@@ -9,8 +9,8 @@
 
 
 <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet">
-<div class="m-auto p-4 login-box">
-    <div class="">
+<div class="login-wrap m-auto p-4">
+    <div>
         <form class="form-signin" role="form" method="post" action=".">
             {% csrf_token %}
             <div class="login-input">
@@ -26,7 +26,7 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Sign in</button>
             </div>
             <div class="login-input">
-                <a href="{% url 'rango:register'%}">Register an accountant</a> <br />
+                <a href="{% url 'rango:register'%}">Create an accountant</a> <br />
             </div>
             <div class="login-input">
                 <span>Login via GitHub：</span>
