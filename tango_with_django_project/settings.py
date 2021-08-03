@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rango',
     'social_django', # github login
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,14 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+#Log in
+#Allow users to register
+REGISTRATION_OPEN = True
+#Automatic login after registration
+REGISTRATION_AUTO_LOGIN = True
+#The page is displayed after the login is successful
+LOGIN_REDIRECT_URL = 'rango:index'
+#The login page is displayed after the login fails
+LOGIN_URL = 'auth_login'
+
