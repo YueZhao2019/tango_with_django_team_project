@@ -7,7 +7,11 @@ Add a Comment
 
 {% block body_block %}
 <div class="container wrap">
-    <h1>Add a Comment to {{ category.name }}</h1>
+    <div class="jumbotron p-4">
+        <div class="container">
+            <h1>Add a Comment to {{ category.name }}</h1>
+        </div>
+    </div>
     <div>
         <form id="add_comment_form" method="post" action="{% url 'rango:add_comment' category.slug %}">
             {% csrf_token %}
@@ -20,7 +24,7 @@ Add a Comment
             {{ field }}
             {% endfor %}
             <p>
-                <input type="submit" name="submit" value="Add Comment" />
+                <button id='add_comment_btn' onclick="click_add_comment_btn()" class="btn btn-primary" type="submit" name="submit">Add Comment</button>
             </p>
             
         </form>
