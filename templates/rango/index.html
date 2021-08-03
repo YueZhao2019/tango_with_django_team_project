@@ -8,51 +8,46 @@ Homepage
 {% block body_block %}
 
 
-<div class="container">
-    <div class="jumbotron p-4">
-        <div class="container">
-            <h1 class="jumbotron-heading">Rango says...</h1>
-            <div>
-                <h2 class="h2">
-                    {% if user.is_authenticated %}
-                    howdy {{ user.username }}!
-                    {% else %}
-                    hey there partner!
-                    {% endif %}
-                </h2>
-                <strong>{{ boldmessage }}</strong>
-            </div>
-        </div>
+<div class="container wrap">
+
+
+    <div>
+        {% if user.is_authenticated %}
+        <h1>
+            Hello! {{ user.username }}!
+        </h1>
+        {% endif %}
+        <h3>No worries novice,</h3>
+        <h3>Let us learn together!</h3>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-6">
-                <div class="card-body">
-                    <h2>Most Liked Categories</h2>
-                    <p class="card-text">
-                        {% if categories %}
-                    <ul class="list-group">
-                        {% for category in categories %}
-                        <li class="list-group-item"><a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% else %}
-                    <strong>There are no categories present.</strong>
-                    {% endif %}
-                    </p>
+    <div class="row category-container">
+        <div class="card col-md-6">
+            <div class="row">
+                {% if categories %}
+                {% for category in categories %}
+                <div class="col-md-6">
+                    <div class="category-wrap">
+                        <div class="category-item"><a href="{% url 'rango:show_category' category.slug %}">Study in {{ category.name }}</a></div>
+                        <p class="category-like">{{ category.likes }} users have liked this language</p>
+                    </div>
                 </div>
+                {% endfor %}
+                {% else %}
+                    <h2>There are no categories present.</h2>
+                {% endif %}
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="card mb-6">
                 <div class="card-body">
-                    <h2>Most Viewed Pages</h2>
+                    <p class="page-title">Most Viewed Pages</p>
                     <p class="card-text">
                         {% if pages %}
                     <ul class="list-group">
                         {% for page in pages %}
-                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></li class="list-group-item">
+                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a></li
+                            class="list-group-item">
                         {% endfor %}
                     </ul>
                     {% else %}

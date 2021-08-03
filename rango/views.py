@@ -12,7 +12,7 @@ from datetime import datetime
 
 def index(request):
     # Refer to the TwD book for more information on how this updated view works.
-    category_list = Category.objects.order_by('-likes')[:5]
+    category_list = Category.objects.order_by('-likes')
     page_list = Page.objects.order_by('-views')[:5]
 
     context_dict = {}

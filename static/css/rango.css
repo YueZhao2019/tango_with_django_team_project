@@ -1,5 +1,17 @@
+body,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+    padding: 0;
+    margin: 0;
+}
+h1,h2,h3{
+    color:#353535;
+}
 body {
     background-color: aqua;
+}
+
+.wrap{
+    background-color:rgb(255,255,255);
+    padding: 50px 30px 50px 30px;
 }
 .background{
     position:fixed;
@@ -29,4 +41,34 @@ body {
 
 .register-wrap h1{
     text-align: center;
+}
+
+.category-container{
+    margin-top: 30px;
+}
+.category-wrap{
+    padding: 10px;
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.category-wrap .category-item{
+    height: 40px;
+    line-height: 40px;
+    background-color:cornsilk;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.category-wrap .category-like{
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.page-title{
+    color: rgb(0,123,255);;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
