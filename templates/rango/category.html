@@ -24,8 +24,27 @@ Unknown Category
 
 {% if user.is_authenticated %}
 <a href="{% url 'rango:add_page' category.slug %}">Add Page</a> <br />
+<a href="{% url 'rango:add_comment' category.slug %}">Add Comment</a> <br />
 {% endif %}
 {% else %}
 The specified category does not exist.
 {% endif %}
+
+<h4>There are {{ comments.count }} comments.</h4>
+<div>
+    {% for comment in comments %}
+    <hr>
+    <p>
+        <strong style="color: pink">
+            {{ comment.user }}
+        </strong>at
+        <span style="color: green">
+            {{ comment.time|date:"Y-m-d H:i:s" }}
+        </span>said
+    </p>
+    <pre style="font-family: inherit; font-size: 1em; white-space: pre-wrap; word-wrap: break-word;">
+            {{ comment.content}}
+        </pre>
+    {% endfor %}
+</div>
 {% endblock %}

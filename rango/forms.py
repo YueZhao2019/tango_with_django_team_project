@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from rango.models import Page, Category, UserProfile
+from rango import models
+from rango.models import Comment, Page, Category, UserProfile
 
 
 class CategoryForm(forms.ModelForm):
@@ -56,3 +57,9 @@ class UserProfileForm(forms.ModelForm):
             'website',
             'picture',
         )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content', )

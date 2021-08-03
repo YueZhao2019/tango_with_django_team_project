@@ -127,7 +127,6 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -152,6 +151,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
+
 #Log in
 #Allow users to register
 REGISTRATION_OPEN = True
@@ -161,4 +161,3 @@ REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = 'rango:index'
 #The login page is displayed after the login fails
 LOGIN_URL = 'auth_login'
-

@@ -1,9 +1,9 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from rango.models import Category
+from rango.models import Category, Comment
 from rango.models import Page
-from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from rango.forms import CategoryForm, CommentForm, PageForm, UserForm, UserProfileForm
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -40,12 +40,15 @@ def show_category(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
+        comments = Comment.objects.filter(category=category)
 
         context_dict['pages'] = pages
         context_dict['category'] = category
+        context_dict['comments'] = comments
     except Category.DoesNotExist:
         context_dict['pages'] = None
         context_dict['category'] = None
+        context_dict['comments'] = None
 
     return render(request, 'rango/category.html', context=context_dict)
 
@@ -186,3 +189,36 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
+
+
+@login_required
+def add_comment(request, category_name_slug):
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+    except:
+        category = None
+
+    if category is None:
+        return redirect('/rango/')
+
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            if category:
+                comment = form.save(commit=False)
+                comment.category = category
+                comment.user = request.user
+                comment.views = 0
+                comment.save()
+
+                return redirect(
+                    reverse('rango:show_category',
+                            kwargs={'category_name_slug': category_name_slug}))
+        else:
+            print(form.errors)
+
+    context_dict = {'form': form, 'category': category}
+    return render(request, 'rango/add_comment.html', context=context_dict)
