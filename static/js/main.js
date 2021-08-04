@@ -37,8 +37,8 @@ function like_category(category_id) {
 
 }
 
-function like_comment(category_id) {
-    console.log(category_id);
+function like_comment(comment_id) {
+    console.log(comment_id);
     $.ajax({
         url: '/rango/like_comment/',
         type:"POST",
