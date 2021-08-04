@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-
+from django.core.paginator import Paginator
 
 def index(request):
     # Refer to the TwD book for more information on how this updated view works.
@@ -36,11 +36,19 @@ def about(request):
 
 def show_category(request, category_name_slug):
     context_dict = {}
+    #分页
+    category = Category.objects.get(slug=category_name_slug)
+    all_comments = Comment.objects.filter(category=category)
+    #每页4个
+    paginator = Paginator(all_comments,4)
+    page_commenrs = request.GET.get('page')
+    comments = paginator.get_page(page_commenrs)
+
 
     try:
-        category = Category.objects.get(slug=category_name_slug)
+        #category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
-        comments = Comment.objects.filter(category=category)
+        #comments = Comment.objects.filter(category=category)
 
         context_dict['pages'] = pages
         context_dict['category'] = category
