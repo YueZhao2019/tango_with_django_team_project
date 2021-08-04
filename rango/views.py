@@ -258,6 +258,7 @@ def delete_comment(request):
 @csrf_exempt
 @require_POST
 def like_category(request):
+    print("点赞目录")
     category_id = request.POST['category_id']
     try:
         #The category is determined by the Id
@@ -274,7 +275,11 @@ def like_category(request):
 
 
 #Like for commnent
+@login_required
+@csrf_exempt
+@require_POST
 def like_comment(request):
+    print("点赞评论")
     comment_id = request.POST['comment_id']
     try:
         comment = Comment.objects.get(id=comment_id)
