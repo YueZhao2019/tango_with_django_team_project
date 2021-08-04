@@ -11,7 +11,7 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse,HttpResponse
 from django.views.decorators.http import require_POST, require_GET
-
+from django.core.paginator import Paginator
 def index(request):
     # Refer to the TwD book for more information on how this updated view works.
     category_list = Category.objects.order_by('-likes')
