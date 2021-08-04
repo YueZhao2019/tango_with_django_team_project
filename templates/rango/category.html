@@ -54,10 +54,14 @@ Unknown Category
                 <small style="color: purple">{{ comment.time|date:"Y-m-d H:i:s" }}&nbsp;&nbsp;&nbsp;</small>
                 <small style="color: tomato">likes: </small>
             </p>
+            {% if user.is_authenticated %}
             <p class="comment-others">
                 <a href="#">like</a>&nbsp;&nbsp;&nbsp;
                 <a href="#" onclick="delete_comment('{{ comment.id }}')">delete</a>
             <p>
+
+            {% endif %}
+            
 
         </div>
         {% endfor %}
