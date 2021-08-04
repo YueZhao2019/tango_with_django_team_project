@@ -20,5 +20,5 @@ urlpatterns = [
     path('category/<slug:category_name_slug>/add_comment/',
          views.add_comment,
          name='add_comment'),
-     path('category/<slug:category_name_slug>/comment-delete/', views.comment_delete, name='comment_delete'),
+     path('delete_comment/', views.delete_comment, name='delete_comment'),
 ]

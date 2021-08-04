@@ -1,15 +1,32 @@
-function click_add_comment_btn() {
-    console.log(123)
+function delete_comment(comment_id) {
+    console.log(comment_id);
+    $.ajax({
+        url: '/rango/delete_comment/',
+        type:"POST",
+        data: {"comment_id":comment_id},
+        success: function(e){
+        if(e=="1"){
+            parent.location.reload();
+            console.log("删除成功");
+        }else{
+            console.log("删除失败");
+        }
+
+        },
+    })
+   
+
 }
 
-function hover_page_list(){
 
-}
-$(function(){
+
+
+$(function () {
+
     
-    $("#add_comment_btn").click(function(){
-        console.log('sadsadass');
-      });
+    console.log('okokok');
+
     
- });
+
+});
 
