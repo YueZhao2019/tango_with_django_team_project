@@ -47,6 +47,7 @@ class Comment(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now=True)
     content = models.TextField()
+    likes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.content

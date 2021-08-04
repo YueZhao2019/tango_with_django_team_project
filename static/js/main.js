@@ -14,7 +14,7 @@ function delete_comment(comment_id) {
 
         },
     })
-   
+
 
 }
 
