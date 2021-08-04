@@ -40,7 +40,7 @@ def show_category(request, category_name_slug):
     context_dict = {}
     #分页
     category = Category.objects.get(slug=category_name_slug)
-    all_comments = Comment.objects.filter(category=category)
+    all_comments = Comment.objects.filter(category=category).order_by('-likes')
     #每页4个
     paginator = Paginator(all_comments,4)
     page_commenrs = request.GET.get('page')
@@ -258,7 +258,6 @@ def delete_comment(request):
 @csrf_exempt
 @require_POST
 def like_category(request):
-    print("点赞目录")
     category_id = request.POST['category_id']
     try:
         #The category is determined by the Id
