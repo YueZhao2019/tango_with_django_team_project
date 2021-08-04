@@ -18,6 +18,25 @@ function delete_comment(comment_id) {
 
 }
 
+function like_category(category_id) {
+    console.log(category_id);
+    $.ajax({
+        url: '/rango/like_category/',
+        type:"POST",
+        data: {"category_id":category_id},
+        success: function(e){
+        if(e=="1"){
+            parent.location.reload();
+            console.log("点赞成功");
+        }else{
+            console.log("点赞失败");
+        }
+
+        },
+    })
+
+
+}
 
 
 
