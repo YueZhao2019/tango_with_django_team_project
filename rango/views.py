@@ -46,7 +46,6 @@ def show_category(request, category_name_slug):
     page_commenrs = request.GET.get('page')
     comments = paginator.get_page(page_commenrs)
 
-
     try:
         #category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
@@ -253,3 +252,31 @@ def delete_comment(request):
         return HttpResponse("1")
     except:
         return HttpResponse("2")  
+
+#Like for category
+def like_category(request):
+    category_id = request.GET['category_id']
+    try:
+        #The category is determined by the Id
+        category = Category.objects.get(id=int(category_id))
+        #If the likes fail
+    except Category.DoesNotExist:
+        return HttpResponse("2")
+    except ValueError:
+        return HttpResponse("2")
+    
+    category.likes = category.likes + 1
+    category.save()
+    return HttpResponse(category.likes)
+
+#Like for commnent
+def like_comment(request):
+    comment_id = request.POST['comment_id']
+    try:
+        comment = Comment.objects.get(id=comment_id)
+        comment.likes += 1
+        comment.save()
+        # successful
+        return HttpResponse("1")
+    except:
+        return HttpResponse("2")
