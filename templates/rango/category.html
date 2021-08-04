@@ -63,7 +63,7 @@ Unknown Category
         {% for comment in comments %}
         <div class="list-group-item list-group-item-action comment-wrap">
 
-            <p class="mb-1 comment">{{ comment.content}}</p>
+            <p class="mb-1 comment">{{ comment.content|safe}}</p>
             <p>
                 <small style="color: green">{{ comment.user }}&nbsp;&nbsp;&nbsp;</small>
                 <small style="color: purple">{{ comment.time|date:"Y-m-d H:i:s" }}&nbsp;&nbsp;&nbsp;</small>

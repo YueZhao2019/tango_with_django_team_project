@@ -280,6 +280,7 @@ def like_category(request):
 def like_comment(request):
     print("点赞评论")
     comment_id = request.POST['comment_id']
+    print(comment_id)
     try:
         comment = Comment.objects.get(id=comment_id)
         comment.likes += 1
