@@ -18,6 +18,12 @@ def add_page(category,title,url,views =0):
     page.save()
     return page
 
+class aboutViewTests(TestCase):
+    def test_about(self):
+        response = self.client.get(reverse('rango:about'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'here is the about page.')
+
 class IndexViewTests(TestCase):
     def test_index_view_with_no_categories(self):
         """
@@ -27,6 +33,15 @@ class IndexViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'There are no categories present.')
         self.assertQuerysetEqual(response.context['categories'], [])
+
+    def test_index_view_with_no_pages(self):
+        """
+        If no pages exist, the appropriate message should be displayed.
+        """
+        response = self.client.get(reverse('rango:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'There are no pages present')
+        self.assertQuerysetEqual(response.context['pages'], [])
     
     def test_index_view_with_categories(self):
         """
@@ -72,6 +87,7 @@ class ModelsTests(TestCase):
         category.save()
         self.assertEqual((category.likes== 2), True)
         self.assertEqual((category.views== 1 ), True)
+        self.assertEqual((category.name== 'Python' ), True) 
 
         #Test Category Models
         page = Page(category = category,title = 'Test1',url = 'http://127.0.0.1:8000/rango/category/sdsd/',views = 1)
@@ -94,3 +110,4 @@ class ModelsTests(TestCase):
         self.assertEqual((comment.user== user_test2), True)
         self.assertEqual((comment.time== '2021-08-04-06:56:22'), True)
         self.assertEqual((comment.content== "xxxxxxxx"), True)
+        self.assertEqual((comment.category== category), True)
