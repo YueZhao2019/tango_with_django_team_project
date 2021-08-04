@@ -43,7 +43,7 @@ Unknown Category
     <div class="add-btn-wrap">
         <a class="btn btn-primary " href="{% url 'rango:add_comment' category.slug %}" role="button">Add Comment</a>
     </div>
-
+    {% if comments %}
     <div class="list-group" id="comment_list">
         {% for comment in comments %}
         <div class="list-group-item list-group-item-action comment-wrap">
@@ -82,5 +82,8 @@ Unknown Category
             {% endif %}
         </div>
     </div>
+    {% else %}
+    <strong>No comments currently in category.</strong>
+    {% endif %}
 </div>
 {% endblock %}
