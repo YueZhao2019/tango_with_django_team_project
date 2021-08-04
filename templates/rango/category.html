@@ -14,6 +14,20 @@ Unknown Category
 
     {% if category %}
     <h1>{{ category.name }}</h1>
+
+        <div>
+        <strong id="like_count">{{ category.likes }}</strong> likes
+        {% if user.is_authenticated %}
+        <button id="like_btn"
+            data-categoryid="{{ category.id }}"
+            class="btn btn-primary btn-sm"
+            type="button">
+            <span data-feather="thumbs-up"></span>
+        Like Category
+        </button>
+        {% endif %}
+    </div>
+
     <div class="add-btn-wrap">
         <a class="btn btn-primary " href="{% url 'rango:add_page' category.slug %}" role="button">Add Page</a>
     </div>
@@ -52,7 +66,7 @@ Unknown Category
             <p>
                 <small style="color: green">{{ comment.user }}&nbsp;&nbsp;&nbsp;</small>
                 <small style="color: purple">{{ comment.time|date:"Y-m-d H:i:s" }}&nbsp;&nbsp;&nbsp;</small>
-                <small style="color: tomato">likes: </small>
+                <small style="color: tomato">likes: {{ comment.likes }} </small>
             </p>
             {% if user.is_authenticated %}
             <p class="comment-others">

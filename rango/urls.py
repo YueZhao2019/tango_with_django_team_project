@@ -21,4 +21,7 @@ urlpatterns = [
          views.add_comment,
          name='add_comment'),
      path('delete_comment/', views.delete_comment, name='delete_comment'),
+     #like
+     path('like_category/', views.like_category, name='like_category'),
+     path('like_comment/', views.like_comment, name='like_comment'),
 ]
