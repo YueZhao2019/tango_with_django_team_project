@@ -46,12 +46,19 @@ def show_category(request, category_name_slug):
         all_comments = Comment.objects.filter(category=category).order_by('-time')
         order = 'normal'
 
+    # paging
+    # N comments per page
+    paginator = Paginator(all_comments,5)
+    page_commenrs = request.GET.get('page')
+    comments = paginator.get_page(page_commenrs)
+
     try:
-        category = Category.objects.get(slug=category_name_slug)
+        #category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
+        #comments = Comment.objects.filter(category=category)
         context_dict['pages'] = pages
         context_dict['category'] = category
-        context_dict['comments'] = all_comments
+        context_dict['comments'] = comments
         context_dict['all_comments'] = all_comments
     except Category.DoesNotExist:
         context_dict['pages'] = None

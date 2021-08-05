@@ -79,7 +79,6 @@ Unknown Category
     <div class="list-group" id="comment_list">
         {% for comment in comments %}
         <div class="list-group-item list-group-item-action comment-wrap">
-
             <p class="mb-1 comment">{{ comment.content|safe}}</p>
             <p>
                 <small style="color: green">{{ comment.user }}&nbsp;&nbsp;&nbsp;</small>
@@ -89,21 +88,41 @@ Unknown Category
             {% if user.is_authenticated %}
             <p class="comment-others">
                 <a href="#" onclick="like_comment('{{ comment.id }}')">like</a>
-
+               
                 <a href="#" onclick="confirm_delete('{{ comment.id }}')">delete</a>
-
+                <script>
+                   
+                </script>
+                <!--<a href="#" onclick="delete_comment('{{ comment.id }}')">delete</a>-->
             <p>
-
-                {% endif %}
-
-
+            {% endif %}
+            
         </div>
         {% endfor %}
     </div>
 
+    <div class="pagination">
+        <div class="step-links">
+            <div class="current">
+                Page {{ comments.number }} of {{ comments.paginator.num_pages }}
+            </div>
+            {% if comments.has_previous %}
+            <div>
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ comments.previous_page_number }}">previous</a>
+                {% endif %}
+
+                {% if comments.has_next %}
+                <a href="?page={{ comments.next_page_number }}">next</a>
+                <a href="?page={{ comments.paginator.num_pages }}">last &raquo;</a>
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+    
     {% else %}
     <strong>No comments currently in category.</strong>
     {% endif %}
-
 </div>
 {% endblock %}
