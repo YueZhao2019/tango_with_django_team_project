@@ -41,6 +41,7 @@ def show_category(request, category_name_slug):
     #分页
     category = Category.objects.get(slug=category_name_slug)
     all_comments = Comment.objects.filter(category=category).order_by('-likes')
+    
     #每页4个
     paginator = Paginator(all_comments,4)
     page_commenrs = request.GET.get('page')
