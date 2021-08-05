@@ -38,13 +38,20 @@ def about(request):
 
 def show_category(request, category_name_slug):
     context_dict = {}
+    category = Category.objects.get(slug=category_name_slug)
+    if request.GET.get('order')=='likes':
+        all_comments = Comment.objects.filter(category=category).order_by('-likes')
+        order = 'likes'
+    else:
+        all_comments = Comment.objects.filter(category=category).order_by('-time')
+        order = 'normal'
+
     try:
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
-        comments = Comment.objects.filter(category=category)
         context_dict['pages'] = pages
         context_dict['category'] = category
-        context_dict['comments'] = comments
+        context_dict['comments'] = all_comments
     except Category.DoesNotExist:
         context_dict['pages'] = None
         context_dict['category'] = None
