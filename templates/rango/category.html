@@ -74,27 +74,6 @@ Unknown Category
             </ol>
         </nav>
     </div>
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{% url 'rango:show_category' category.slug %}">
-                        5
-                    </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{% url 'rango:show_category' category.slug %}?numberOfPage=ten">
-                        10
-                    </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{% url 'rango:show_category' category.slug %}?numberOfPage=twenty">
-                        20
-                    </a>
-                </li>
-            </ol>
-        </nav>
-    </div>
 
     {% if comments %}
     <div class="list-group" id="comment_list">
