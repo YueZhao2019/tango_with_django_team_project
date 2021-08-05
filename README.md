@@ -6,7 +6,8 @@
 >  Python==3.7.5  
 >  
 ## **Step 0** ：Activate the environment
->  ./conda activate rango
+>  cd tango_with_django_team_project
+>  conda activate rango
 
 ## **Step 1** ：Install
 >  pip install django-tinymce  
