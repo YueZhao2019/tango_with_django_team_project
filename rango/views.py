@@ -38,7 +38,7 @@ def about(request):
 
 def show_category(request, category_name_slug):
     context_dict = {}
-    #分页
+    #paging
     category = Category.objects.get(slug=category_name_slug)
     if request.GET.get('order')=='likes':
         all_comments = Comment.objects.filter(category=category).order_by('-likes')
@@ -47,7 +47,7 @@ def show_category(request, category_name_slug):
         all_comments = Comment.objects.filter(category=category).order_by('-time')
         order = 'normal'
     
-    #每页4个
+    #Four comments per page
     if request.GET.get('numberOfPage')== 'ten':
         paginator = Paginator(all_comments,10)
         page_commenrs = request.GET.get('page')
@@ -254,8 +254,8 @@ def add_comment(request, category_name_slug):
 @require_POST
 def delete_comment(request):
     
-    #登录用户可以删除任意一条评论
-    # 根据 id 获取需要删除的文章
+    #Login users can delete any comment
+    # Get the articles you want to delete based on the ID
     comment_id = request.POST['comment_id']
     print(comment_id)
     try:
@@ -263,9 +263,9 @@ def delete_comment(request):
         c_id = Comment.objects.filter(id=comment_id).values_list('category_id', flat=True)[0]
         c_name = Category.objects.filter(id=c_id).values_list('name', flat=True)[0]
         print(c_name)
-        # 调用.delete()方法删除评论
+        # Call the.delete() method to delete the comment
         comment.delete()
-        # 完成删除后返回当前类别页面
+        # Return to the current category page after the deletion is complete
         return HttpResponse("1")
     except:
         return HttpResponse("2")  
