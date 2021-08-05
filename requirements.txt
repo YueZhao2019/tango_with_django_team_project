@@ -1,0 +1,4 @@
+django-tinymce
+social-auth-app-django
+coverage
+django-registration-redux==2.2
