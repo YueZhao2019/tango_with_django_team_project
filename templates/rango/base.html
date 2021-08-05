@@ -26,7 +26,7 @@
     <script>tinymce.init({selector:'textarea'});</script>
 </head>
 
-<body class="background">
+<body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark p-0">
             <a class="navbar-brand p-2" href="{% url 'rango:index' %}">Rango</a>
@@ -53,7 +53,7 @@
         </nav>
     </header>
 
-    <div class="container-fluid">
+    <div class="container-fluid"> 
     
         <div class="row">
             {% if user.is_authenticated %}
