@@ -54,7 +54,7 @@ Unknown Category
     The specified category does not exist.
     {% endif %}
 
-    <h4 class="comment-title">There are {{ comments.count }} comments.</h4>
+    <h4 class="comment-title">There are {{ all_comments.count }} comments.</h4>
     <div class="add-btn-wrap">
         <a class="btn btn-primary " href="{% url 'rango:add_comment' category.slug %}" role="button">Add Comment</a>
     </div>
