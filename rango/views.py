@@ -44,7 +44,7 @@ def show_category(request, category_name_slug):
         all_comments = Comment.objects.filter(category=category).order_by('-likes')
         order = 'likes'
     else:
-        all_comments = Comment.objects.all()
+        all_comments = Comment.objects.filter(category=category).order_by('-time')
         order = 'normal'
     
     #每页4个
