@@ -50,6 +50,24 @@ def populate():
             'Java': {'pages': java_pages, 'views': 63, 'likes': 42},
             'Other Frameworks': {'pages': other_pages, 'views': 32, 'likes': 16} }
 
+    user_test1=User(username='father',password='pl050030809')    
+    user_test2=User(username='son',password='pl050030809')  
+
+    comments = {'Python': {'user': user_test1, 'time':'2021-08-05 09:23:21','content':'xxxvavavxxxx','likes': 10},
+                'Django': {'user': user_test1, 'time':'2021-08-03 09:23:21','content':'hahahahah','likes': 101},
+                'Python': {'user': user_test1, 'time':'2021-08-04 09:23:21','content':'lalala','likes': 102},
+                'Django': {'user': user_test2, 'time':'2021-08-05 09:23:21','content':'asasasa','likes': 103},
+                'Python': {'user': user_test1, 'time':'2021-08-06 09:23:21','content':'wobuhi','likes': 104},
+                'Django': {'user': user_test2, 'time':'2021-08-07 09:23:21','content':'tttttt','likes': 105},
+                'Python': {'user': user_test1, 'time':'2021-08-08 09:23:21','content':'aaaaaa','likes': 107},
+            
+            }
+    
+
+
+
+
+
     for cat, cat_data in cats.items():
         c = add_cat(cat, views=cat_data['views'], likes=cat_data['likes'])
         for p in cat_data['pages']:
@@ -73,10 +91,11 @@ def add_cat(name, views=0, likes=0):
     c.save()
     return c
 
-def add_comment(category,user,time,content,likes):
+def add_comment(name,user,time,content,likes):
+    cat = Category.objects.get_or_create(name=name)[0]
     comment = Comment.objects.create()
     comment.user = user
-    comment.category = category
+    comment.category = cat
     comment.time = time
     comment.content = content
     comment.likes = likes
