@@ -12,8 +12,11 @@ Add a Comment
             <h1>Add a Comment to {{ category.name }}</h1>
         </div>
     </div>
+    
     <div>
+
         <form id="add_comment_form" method="post" action="{% url 'rango:add_comment' category.slug %}">
+            <label>
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
             {{ hidden }}
@@ -23,11 +26,13 @@ Add a Comment
             {{ field.help_text }}
             {{ field }}
             {% endfor %}
+            </label>
+            <br>
             <p>
                 <button id='add_comment_btn' onclick="click_add_comment_btn()" class="btn btn-primary" type="submit" name="submit">Add Comment</button>
             </p>
-            
         </form>
+        
     </div>
 </div>
 {% endblock %}

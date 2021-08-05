@@ -28,4 +28,6 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     #github login
     path('login/github/', include('social_django.urls', namespace='social')),
+    #editor
+    path('tinymce/', include('tinymce.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

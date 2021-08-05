@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rango',
     'social_django', # github login
     'registration',
+    'tinymce',#editor
 ]
 
 MIDDLEWARE = [
@@ -151,7 +152,6 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-
 #Log in
 #Allow users to register
 REGISTRATION_OPEN = True
@@ -161,3 +161,4 @@ REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = 'rango:index'
 #The login page is displayed after the login fails
 LOGIN_URL = 'auth_login'
+

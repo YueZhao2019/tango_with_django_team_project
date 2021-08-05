@@ -40,7 +40,7 @@ def show_category(request, category_name_slug):
     context_dict = {}
     #分页
     category = Category.objects.get(slug=category_name_slug)
-    all_comments = Comment.objects.filter(category=category)
+    all_comments = Comment.objects.filter(category=category).order_by('-likes')
     #每页4个
     paginator = Paginator(all_comments,4)
     page_commenrs = request.GET.get('page')
@@ -254,24 +254,33 @@ def delete_comment(request):
         return HttpResponse("2")  
 
 #Like for category
+@login_required
+@csrf_exempt
+@require_POST
 def like_category(request):
-    category_id = request.GET['category_id']
+    category_id = request.POST['category_id']
     try:
         #The category is determined by the Id
         category = Category.objects.get(id=int(category_id))
+        category.likes = category.likes + 1
+        category.save()
+        return HttpResponse("1")
         #If the likes fail
     except Category.DoesNotExist:
         return HttpResponse("2")
     except ValueError:
         return HttpResponse("2")
     
-    category.likes = category.likes + 1
-    category.save()
-    return HttpResponse(category.likes)
+
 
 #Like for commnent
+@login_required
+@csrf_exempt
+@require_POST
 def like_comment(request):
+    print("点赞评论")
     comment_id = request.POST['comment_id']
+    print(comment_id)
     try:
         comment = Comment.objects.get(id=comment_id)
         comment.likes += 1
