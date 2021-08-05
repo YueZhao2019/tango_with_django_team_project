@@ -13,18 +13,21 @@ Unknown Category
 <div class="container wrap">
 
     {% if category %}
-    <h1>{{ category.name }}</h1>
-
-    <div>
-        <strong id="like_count">{{ category.likes }}</strong> likes
-        {% if user.is_authenticated %}
-        <button id="like_btn" data-categoryid="{{ category.id }}" class="btn btn-primary btn-sm"
-            onclick="like_category('{{ category.id }}')" type="button">
-            <span data-feather="thumbs-up"></span>
-            Like Category
-        </button>
-        {% endif %}
+    <div class="category-title">
+        <h1>{{ category.name }}</h1>
+        <div class="title-like">
+            <strong id="like_count">{{ category.likes }}</strong> likes
+            {% if user.is_authenticated %}
+            <button id="like_btn" data-categoryid="{{ category.id }}" class="btn btn-primary btn-sm"
+                onclick="like_category('{{ category.id }}')" type="button">
+                <span data-feather="thumbs-up"></span>
+                Like
+            </button>
+            {% endif %}
+        </div>
     </div>
+
+    
 
     <div class="add-btn-wrap">
         <a class="btn btn-primary " href="{% url 'rango:add_page' category.slug %}" role="button">Add Page</a>

@@ -34,6 +34,15 @@ body {
 .category-container{
     margin-top: 30px;
 }
+.category-title{
+    position: relative;
+}
+.title-like{
+    position: absolute;
+    top:50%;
+    right: 0px;
+    margin-top: -15px;
+}
 .category-wrap{
     padding: 10px;
     margin: 10px 0px;
