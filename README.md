@@ -6,6 +6,7 @@
 >  Python==3.7.5  
 >  
 ## **Step 0** ：Activate the environment
+>  gitclone https://github.com/YueZhao2019/tango_with_django_team_project.git  
 >  cd tango_with_django_team_project  
 >  conda activate rango  
 
