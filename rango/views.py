@@ -48,9 +48,19 @@ def show_category(request, category_name_slug):
         order = 'normal'
     
     #每页4个
-    paginator = Paginator(all_comments,4)
-    page_commenrs = request.GET.get('page')
-    comments = paginator.get_page(page_commenrs)
+    if request.GET.get('numberOfPage')== 'ten':
+        paginator = Paginator(all_comments,10)
+        page_commenrs = request.GET.get('page')
+        comments = paginator.get_page(page_commenrs)
+    elif request.GET.get('numberOfPage')=='twenty':
+        paginator = Paginator(all_comments,20)
+        page_commenrs = request.GET.get('page')
+        comments = paginator.get_page(page_commenrs)
+    else:
+        paginator = Paginator(all_comments,5)
+        page_commenrs = request.GET.get('page')
+        comments = paginator.get_page(page_commenrs)
+
 
     try:
         #category = Category.objects.get(slug=category_name_slug)
