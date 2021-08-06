@@ -1,3 +1,4 @@
+// click event funciton to delete comment
 function delete_comment(comment_id) {
     console.log(comment_id);
     $.ajax({
@@ -18,6 +19,7 @@ function delete_comment(comment_id) {
 
 }
 
+// click event funciton to open confirm delete modal
 function confirm_delete(comment_id) {
 
     layer.open({
@@ -34,6 +36,7 @@ function confirm_delete(comment_id) {
     })
 }
 
+// click event funciton to like a category
 function like_category(category_id) {
     console.log(category_id);
     $.ajax({
@@ -52,7 +55,7 @@ function like_category(category_id) {
     })
 
 }
-
+// click event funciton to like a comment
 function like_comment(comment_id) {
     console.log(comment_id);
     $.ajax({

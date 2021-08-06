@@ -39,12 +39,8 @@ def about(request):
 def show_category(request, category_name_slug):
     context_dict = {}
     category = Category.objects.get(slug=category_name_slug)
-    if request.GET.get('order')=='likes':
-        all_comments = Comment.objects.filter(category=category).order_by('-likes')
-        order = 'likes'
-    else:
-        all_comments = Comment.objects.filter(category=category).order_by('-time')
-        order = 'normal'
+
+    all_comments = Comment.objects.filter(category=category).order_by('-time')
 
     # paging
     # N comments per page
