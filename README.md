@@ -11,21 +11,15 @@
 >  conda activate rango  
 
 ## **Step 1** ：Install
->  pip install django-tinymce  
->  pip install social-auth-app-django  
->  pip install coverage  
->  pip install -U django-registration-redux==2.2  
+>  pip install -r requirements.txt  
+
 
 ## **Step 2** ：Make database migrations and fill in the data
 >  python manage.py makemigrations  
 >  python manage.py migrate  
 >  python populate_rango.py  
 
-
-## **Step 3** ：Creating a Superuser
->  python manage.py createsuperuser  
-
-## **Step 4** ：Run
+## **Step 3** ：Run
 >  python manage.py runserver  
 
 
