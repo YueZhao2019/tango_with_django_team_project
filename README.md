@@ -15,7 +15,7 @@
 
 
 ## **Step 2** ：Make database migrations and fill in the data
->  python manage.py makemigrations  
+>  python manage.py makemigrations rango  
 >  python manage.py migrate  
 >  python populate_rango.py  
 
