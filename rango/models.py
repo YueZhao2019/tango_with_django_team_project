@@ -52,4 +52,12 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
+#Like 
+class Praise(models.Model):
 
+    #Store the ID of the comment
+    praiseID = models.IntegerField(default=0,unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.praiseID,'by',self.user

@@ -72,32 +72,35 @@ Unknown Category
             {% if user.is_authenticated %}
             <p class="comment-others">
                 <a href="#" onclick="like_comment('{{ comment.id }}')">like</a>
-               
-                <a href="#" onclick="confirm_delete('{{ comment.id }}')">delete</a>
-                <script>
-                   
-                </script>
-                <!--<a href="#" onclick="delete_comment('{{ comment.id }}')">delete</a>-->
+
+                {% if request.user == comment.user %}
+                    <a href="#" onclick="confirm_delete('{{ comment.id }}')">delete</a>
+                {% endif %}
+
             <p>
-            {% endif %}
+
+                {% endif %}
             
         </div>
         {% endfor %}
     </div>
-
+    <!-- Function of paging, Clicking the button will jump to the page of the corresponding page  -->
     <div class="pagination">
         <div class="step-links">
             <div class="current">
                 Page {{ comments.number }} of {{ comments.paginator.num_pages }}
             </div>
+            <!--Determine if the previous page exists-->
             {% if comments.has_previous %}
             <div>
+            <!--The first page-->
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ comments.previous_page_number }}">previous</a>
                 {% endif %}
-
+            <!--Determine if the next page exists-->
                 {% if comments.has_next %}
                 <a href="?page={{ comments.next_page_number }}">next</a>
+            <!--The last page-->
                 <a href="?page={{ comments.paginator.num_pages }}">last &raquo;</a>
             </div>
 

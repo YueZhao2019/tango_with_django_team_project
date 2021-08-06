@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from rango.models import Category, Comment
-from rango.models import Page
+from rango.models import Page,Praise
 from rango.forms import CategoryForm, CommentForm, PageForm, UserForm, UserProfileForm
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
@@ -35,7 +35,13 @@ def about(request):
     context_dict['visits'] = request.session['visits']
     return render(request, 'rango/about.html', context=context_dict)
 
-
+def contact(request):
+    # Spoiler: you don't need to pass a context dictionary here.
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'rango/contact.html', context=context_dict)  
+    
 def show_category(request, category_name_slug):
     context_dict = {}
     category = Category.objects.get(slug=category_name_slug)
@@ -243,14 +249,18 @@ def delete_comment(request):
     comment_id = request.POST['comment_id']
     print(comment_id)
     try:
+        
         comment = Comment.objects.get(id=comment_id)
-        c_id = Comment.objects.filter(id=comment_id).values_list('category_id', flat=True)[0]
-        c_name = Category.objects.filter(id=c_id).values_list('name', flat=True)[0]
-        print(c_name)
-        # Call the.delete() method to delete the comment
-        comment.delete()
-        # Return to the current category page after the deletion is complete
-        return HttpResponse("1")
+        if request.user == comment.user:
+            c_id = Comment.objects.filter(id=comment_id).values_list('category_id', flat=True)[0]
+            c_name = Category.objects.filter(id=c_id).values_list('name', flat=True)[0]
+            print(c_name)
+            # Call the.delete() method to delete the comment
+            comment.delete()
+            # Return to the current category page after the deletion is complete
+            return HttpResponse("1")
+        else:
+            return HttpResponse("2") 
     except:
         return HttpResponse("2")  
 
@@ -279,14 +289,32 @@ def like_category(request):
 @csrf_exempt
 @require_POST
 def like_comment(request):
-    print("点赞评论")
     comment_id = request.POST['comment_id']
     print(comment_id)
     try:
-        comment = Comment.objects.get(id=comment_id)
-        comment.likes += 1
-        comment.save()
-        # successful
-        return HttpResponse("1")
+    
+        if Praise.objects.filter(praiseID=comment_id).exists():
+            print(Praise.objects.get(praiseID=comment_id))
+            return HttpResponse("2")
+           
+        else:    
+            get_praise(request,comment_id)
+            comment = Comment.objects.get(id=comment_id)
+            comment.likes += 1
+            comment.save()
+            # successful
+            return HttpResponse("1")
+             
     except:
         return HttpResponse("2")
+
+def get_praise(request,commentID):
+    current_user= request.user
+
+    new_praise= Praise()
+    new_praise.user= current_user
+   
+    new_praise.praiseID= commentID
+    print('还是这里呢？？')
+    print(new_praise.praiseID)
+    new_praise.save()
