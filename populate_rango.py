@@ -21,10 +21,10 @@ def populate():
          'url':'http://www.korokithakis.net/tutorials/python/'
          ,'views':10,},
         {'title':'Learn Python in 100 Minutes',
-         'url':'http://www.hahaha.net/tutorials/python/'
+         'url':'http://docs.python.org/3/whatsnew/changelog.html'
          ,'views':10,},
-        {'title':'Learn Python is good',
-         'url':'http://www.lalala.net/tutorials/python/'
+        {'title':'Welcome to Github',
+         'url':'https://github.com/'
          ,'views':10,} ]
     
     django_pages = [
@@ -33,10 +33,10 @@ def populate():
          'views':110,},
         {'title':'Django Rocks',
          'url':'http://www.djangorocks.com/','views':121,},
-        {'title':'How to Tango with Django',
-         'url':'http://www.tangowithdjango.com/','views':122,},
+        {'title':'Introducing Twd',
+         'url':'http://www.tangowithdjango.com/#intro','views':122,},
         {'title':'How to Tango with me',
-         'url':'http://www.tsdsdsgo.com/','views':122,} ]
+         'url':'http://www.tangowithdjango.com/#authors','views':122,} ]
 
     java_pages = [
         {'title':'Official java Tutorial',
@@ -44,8 +44,8 @@ def populate():
          'views':140,},
         {'title':'Django Rocks',
          'url':'http://www.djangorocks.com/','views':161,},
-        {'title':'How to Tango with Django',
-         'url':'http://www.tangowithdjango.com/','views':162,} ]
+        {'title':'How to write code',
+         'url':'http://codetop.cc/#/home','views':162,} ]
 
     other_pages = [
         {'title':'Bottle',
