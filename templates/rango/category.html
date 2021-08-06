@@ -58,22 +58,6 @@ Unknown Category
     <div class="add-btn-wrap">
         <a class="btn btn-primary " href="{% url 'rango:add_comment' category.slug %}" role="button">Add Comment</a>
     </div>
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{% url 'rango:show_category' category.slug %}">
-                        Latest
-                    </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{% url 'rango:show_category' category.slug %}?order=likes">
-                        Most Like
-                    </a>
-                </li>
-            </ol>
-        </nav>
-    </div>
 
     {% if comments %}
     <div class="list-group" id="comment_list">
