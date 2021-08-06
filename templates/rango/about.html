@@ -6,12 +6,34 @@ About Rango
 {% endblock %}
 
 {% block body_block %}
-<h1>Rango says...</h1>
-<div>
+<!-- -->
+<!--h1>Rango says...</h1-->
+<!--div>
     here is the about page. <br />
     This tutorial has been put together by Yue Zhao.<br />
     <p>Visits: {{ visits }}</p>
+</div-->
+
+<div class="text-center">
+     
+    <img alt="Picture of Rangohelpsyou" src="{% static 'images/rangohelpsme.jpg' %}" weight="558" height = "558"/>
+    <li>    
+    <ul>
+        This application was created in August 2021 as a teamwork as a part of Internet Technology course at University of Glasgow
+        </ul>
+        <ul>
+            Rango is an online learning web app that allows users to browse through  categories to access various tutorial websites while they can review them and recommend
+        </ul>
+        <ul>
+            After creating your user account, you can share comments and tutorial link onto the category page. You can also delete your review and show your likes to others'comments , as well as sort them by best or new
+        <ul>
+        </li>  
+        
+
+    
 </div>
-<img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" />
-<img src="{{ MEDIA_URL }}cat.jpg" alt="Picture of a Cat" />
+
+
+<!--img src="{{ MEDIA_URL }}rangoname.png" alt="Picture of a rango" weight="558" height = "558"/-->
+
 {% endblock %}

@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from rango.models import Category, Comment
-from rango.models import Page
+from rango.models import Page,Praise
 from rango.forms import CategoryForm, CommentForm, PageForm, UserForm, UserProfileForm
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
@@ -35,7 +35,13 @@ def about(request):
     context_dict['visits'] = request.session['visits']
     return render(request, 'rango/about.html', context=context_dict)
 
-
+def contact(request):
+    # Spoiler: you don't need to pass a context dictionary here.
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'rango/contact.html', context=context_dict)  
+    
 def show_category(request, category_name_slug):
     context_dict = {}
     category = Category.objects.get(slug=category_name_slug)
@@ -238,19 +244,23 @@ def add_comment(request, category_name_slug):
 @require_POST
 def delete_comment(request):
     
-    #Login users can delete any comment
-    # Get the articles you want to delete based on the ID
+    #登录用户可以删除任意一条评论
+    # 根据 id 获取需要删除的文章
     comment_id = request.POST['comment_id']
     print(comment_id)
     try:
+        
         comment = Comment.objects.get(id=comment_id)
-        c_id = Comment.objects.filter(id=comment_id).values_list('category_id', flat=True)[0]
-        c_name = Category.objects.filter(id=c_id).values_list('name', flat=True)[0]
-        print(c_name)
-        # Call the.delete() method to delete the comment
-        comment.delete()
-        # Return to the current category page after the deletion is complete
-        return HttpResponse("1")
+        if request.user == comment.user:
+            c_id = Comment.objects.filter(id=comment_id).values_list('category_id', flat=True)[0]
+            c_name = Category.objects.filter(id=c_id).values_list('name', flat=True)[0]
+            print(c_name)
+            # 调用.delete()方法删除评论
+            comment.delete()
+            # 完成删除后返回当前类别页面
+            return HttpResponse("1")
+        else:
+            return HttpResponse("2") 
     except:
         return HttpResponse("2")  
 
@@ -283,10 +293,47 @@ def like_comment(request):
     comment_id = request.POST['comment_id']
     print(comment_id)
     try:
-        comment = Comment.objects.get(id=comment_id)
-        comment.likes += 1
-        comment.save()
-        # successful
-        return HttpResponse("1")
+    
+        if Praise.objects.filter(praiseID=comment_id).exists():
+            print(Praise.objects.get(praiseID=comment_id))
+            print('点赞失败')
+            return HttpResponse("2")
+           
+        else:
+            
+            print('点赞初步成功')
+            get_praise(request,comment_id)
+
+            print('成功从函数中出来')
+            comment = Comment.objects.get(id=comment_id)
+            comment.likes += 1
+            comment.save()
+            # successful
+            print('成功发送消息')
+            return HttpResponse("1")
+             
     except:
         return HttpResponse("2")
+
+def get_praise(request,commentID):
+    print(commentID)
+    print('成功进入函数')
+    current_user= request.user
+    
+    print('这里吗')
+    new_praise= Praise()
+    print('在这里吗？')
+    new_praise.user= current_user
+    print(new_praise.user)
+    print('还是这里？')
+    #print(new_praise.id)
+   
+    new_praise.praiseID= commentID
+    print('还是这里呢？？')
+    print(new_praise.praiseID)
+    new_praise.save()
+    print('还是这里？？？')
+    print(new_praise.id)
+    #pk_note.praise_count+= 1
+    #pk_note.save()
+    

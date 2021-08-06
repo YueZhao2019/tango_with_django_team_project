@@ -72,14 +72,14 @@ Unknown Category
             {% if user.is_authenticated %}
             <p class="comment-others">
                 <a href="#" onclick="like_comment('{{ comment.id }}')">like</a>
-               
-                <a href="#" onclick="confirm_delete('{{ comment.id }}')">delete</a>
-                <script>
-                   
-                </script>
-                <!--<a href="#" onclick="delete_comment('{{ comment.id }}')">delete</a>-->
+
+                {% if request.user == comment.user %}
+                    <a href="#" onclick="confirm_delete('{{ comment.id }}')">delete</a>
+                {% endif %}
+
             <p>
-            {% endif %}
+
+                {% endif %}
             
         </div>
         {% endfor %}

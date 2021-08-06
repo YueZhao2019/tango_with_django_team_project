@@ -52,4 +52,18 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
+#点赞的类
+class Praise(models.Model):
+    #储存所在类的名字
+    #category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    #储存comment的id
+    praiseID = models.IntegerField(default=0,unique=True)
+    #commentID = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    #comment= models.CharField(max_length=512, blank=True, null=True)
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #user= models.CharField(max_length=256, blank=True, null=True)
+    #time= models.DateTimeField(auto_now_add=True)
+   
+    def __str__(self):
+        return self.praiseID,'by',self.user
