@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from rango.models import Category, Comment
-from rango.models import Page,Praise
+from rango.models import Page
 from rango.forms import CategoryForm, CommentForm, PageForm, UserForm, UserProfileForm
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
@@ -293,28 +293,13 @@ def like_comment(request):
     print(comment_id)
     try:
     
-        if Praise.objects.filter(praiseID=comment_id).exists():
-            print(Praise.objects.get(praiseID=comment_id))
-            return HttpResponse("2")
-           
-        else:    
-            get_praise(request,comment_id)
-            comment = Comment.objects.get(id=comment_id)
-            comment.likes += 1
-            comment.save()
-            # successful
-            return HttpResponse("1")
+       
+        comment = Comment.objects.get(id=comment_id)
+        comment.likes += 1
+        comment.save()
+        # successful
+        return HttpResponse("1")
              
     except:
         return HttpResponse("2")
 
-def get_praise(request,commentID):
-    current_user= request.user
-
-    new_praise= Praise()
-    new_praise.user= current_user
-   
-    new_praise.praiseID= commentID
-    print('还是这里呢？？')
-    print(new_praise.praiseID)
-    new_praise.save()

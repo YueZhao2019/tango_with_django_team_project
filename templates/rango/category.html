@@ -75,6 +75,7 @@ Unknown Category
 
                 {% if request.user == comment.user %}
                     <a href="#" onclick="confirm_delete('{{ comment.id }}')">delete</a>
+                
                 {% endif %}
 
             <p>

@@ -36,6 +36,9 @@ function confirm_delete(comment_id) {
     })
 }
 
+
+
+
 // click event funciton to like a category
 function like_category(category_id) {
     console.log(category_id);
